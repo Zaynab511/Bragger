@@ -638,8 +638,8 @@ namespace Braggerbk.Controllers
 
 
         // API key and endpoint configuration
-        private readonly string _azureApiKey = "2d47aa16e0e5495cb376632ef33915b9"; // Replace with your actual key
-        private readonly string _endpoint = "https://sanbox-openai.openai.azure.com/openai/deployments/gpt4o/chat/completions?api-version=2024-02-15-preview"; // Update the endpoint as necessary
+        private readonly string _azureApiKey = ""; // Replace with your actual key
+        private readonly string _endpoint = ""; // Update the endpoint as necessary
 
         [HttpGet]
         [Route("GetTagSuggestions")]
