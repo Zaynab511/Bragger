@@ -1,0 +1,130 @@
+<div class="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 mt-10">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Create Achievement</h2>
+
+  <form [formGroup]="bragForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+      <input type="text" id="title" formControlName="title" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-500" placeholder="Enter the title">
+    </div>
+
+    <div class="mb-4">
+      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+      <input type="date" id="date" formControlName="date" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-500">
+    </div>
+
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+      <editor formControlName="description" apiKey="your-api-key" [init]="editorConfig"></editor>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Available Tags</label>
+      <div class="mt-2">
+        <div *ngFor="let tag of availableTags" class="flex items-center">
+          <input 
+            type="checkbox" 
+            [value]="tag.tagName" 
+            (change)="onTagChange(tag.tagName)" 
+            [checked]="selectedTags.has(tag.tagName)"
+            class="mr-2"
+          />
+          <label>{{ tag.tagName }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Selected Tags</label>
+      <div class="flex flex-wrap mt-2">
+        <span *ngFor="let tag of selectedTags" class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full mr-2 mb-2 flex items-center">
+          {{ tag }}
+          <button type="button" (click)="deselectTag(tag)" class="ml-2 text-blue-600 hover:text-blue-800">x</button>
+        </span>
+      </div>
+    </div>
+
+    <!-- Button to fetch AI-generated tags -->
+    <div class="mb-4">
+      <button type="button" (click)="fetchAISuggestions()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200">
+        Fetch AI Generated Tags
+      </button>
+    </div>
+
+    <!-- Display AI-generated tags -->
+    <div *ngIf="aiTags.length > 0" class="mt-4">
+      <h3 class="text-lg font-semibold">AI Generated Tags</h3>
+      <div class="max-h-48 overflow-y-auto border border-gray-300 rounded-lg p-2 bg-gray-100">
+        <div *ngFor="let tag of aiTags" class="flex items-center mt-2">
+          <input 
+            type="checkbox" 
+            [value]="tag" 
+            (change)="onAItagChange(tag)" 
+            [checked]="selectedTags.has(tag)"
+            class="mr-2"
+          />
+          <label>{{ tag }}</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded transition duration-200">Create</button>
+  </form>
+
+  <div *ngIf="successMessage" class="mt-4 text-green-600">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="mt-4 text-red-600">{{ errorMessage }}</div>
+</div>
+
+
+
+<!--<div class="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 mt-10">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Create Achievement</h2>
+
+  <form [formGroup]="bragForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+      <input type="text" id="title" formControlName="title" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-500" placeholder="Enter the title">
+    </div>
+
+    <div class="mb-4">
+      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+      <input type="date" id="date" formControlName="date" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-500">
+    </div>
+
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+      <editor formControlName="description" apiKey="your-api-key" [init]="editorConfig"></editor>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Available Tags</label>
+      <div class="mt-2">
+        <div *ngFor="let tag of availableTags" class="flex items-center">
+          <input 
+            type="checkbox" 
+            [value]="tag.tagName" 
+            (change)="onTagChange(tag.tagName)" 
+            [checked]="selectedTags.has(tag.tagName)"
+            class="mr-2"
+          />
+          <label>{{ tag.tagName }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Selected Tags</label>
+      <div class="flex flex-wrap mt-2">
+        <span *ngFor="let tag of selectedTags" class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full mr-2 mb-2 flex items-center">
+          {{ tag }}
+          <button type="button" (click)="deselectTag(tag)" class="ml-2 text-blue-600 hover:text-blue-800">x</button>
+        </span>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded transition duration-200">Create</button>
+  </form>
+
+  <div *ngIf="successMessage" class="mt-4 text-green-600">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="mt-4 text-red-600">{{ errorMessage }}</div>
+</div>
+-->

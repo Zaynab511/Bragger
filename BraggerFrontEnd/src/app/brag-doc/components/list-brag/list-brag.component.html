@@ -1,0 +1,58 @@
+<div class="max-w-4xl mx-auto mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+    <span class="text-yellow-500 text-4xl mr-2">🏆</span>
+    Your Achievements
+  </h2>
+
+  <div *ngIf="successMessage" class="mb-4 text-green-600">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="mb-4 text-red-600">{{ errorMessage }}</div>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+      <thead class="bg-lightblue">
+        <tr>
+          <th class="py-3 px-4 md:px-6 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Date</th>
+          <th class="py-3 px-4 md:px-6 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Title</th>
+          <th class="py-3 px-4 md:px-6 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Description</th>
+          <th class="py-3 px-4 md:px-6 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Tag</th>
+          <th class="py-3 px-4 md:px-6 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iterate through brags -->
+        <tr *ngFor="let brag of brags" class="border-b border-gray-300 hover:bg-gray-50 transition duration-300">
+          <td class="py-3 px-4 md:px-6 text-sm text-gray-700">{{ brag.date | date: 'mediumDate' }}</td>
+          <td class="py-3 px-4 md:px-6 text-sm text-gray-700">{{ brag.title }}</td>
+          <td class="py-3 px-4 md:px-6 text-sm text-gray-700" [innerHTML]="brag.description | sanitize"></td>
+
+          <td class="py-3 px-4 md:px-6 text-sm text-gray-700">
+            {{ getTags(brag.achievementTags) }}
+          </td>
+          
+          
+          
+
+          <td class="py-3 px-4 md:px-6 text-sm text-gray-700 flex space-x-2">
+            <button (click)="navigateToEdit(brag.id)">
+              <span class="edit-btn bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-4 rounded transition duration-200">Edit</span>
+            </button>
+            <button (click)="deleteBrag(brag.id)">
+              <span class="delete-btn bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded transition duration-200">Delete</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Display if no achievements are available -->
+        <tr *ngIf="brags.length === 0">
+          <td colspan="5" class="py-3 px-4 md:px-6 text-sm text-center text-gray-700">No achievements available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4">
+    <button class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md p-3 hover:bg-gradient-to-l" (click)="handleExportPDF()">
+      Export Achievements
+    </button>
+  </div>
+</div>

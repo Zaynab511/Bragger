@@ -1,0 +1,83 @@
+<section class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <!-- Register container -->
+  <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+    <!-- Animation Text -->
+    <div class="md:w-2/3 px-8 md:px-16">
+      <h2 class="font-bold text-2xl text-[#002D74] animate-fadeIn">Register Yourself</h2>
+      <p class="text-xs mt-4 text-[#002D74]">Join us and create your profile easily</p>
+
+      <form (ngSubmit)="register()" class="flex flex-col gap-4">
+        <input class="p-2 mt-8 rounded-xl border" type="email" [(ngModel)]="email" name="email" placeholder="Email" required>
+        
+        <input class="p-2 rounded-xl border" type="password" [(ngModel)]="password" name="password" placeholder="Password" required>
+        
+        <input class="p-2 rounded-xl border" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        
+        <input class="p-2 rounded-xl border" type="text" [(ngModel)]="name" name="name" placeholder="Name" required>
+        
+        <input class="p-2 rounded-xl border" type="text" [(ngModel)]="jobTitle" name="jobTitle" placeholder="Job Title" required>
+        
+        <input class="p-2 rounded-xl border" type="text" [(ngModel)]="industry" name="industry" placeholder="Industry" required>
+        
+        <input class="p-2 rounded-xl border" type="text" [(ngModel)]="contact" name="contact" placeholder="Contact" required>
+
+        <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">Register</button>
+      </form>
+
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+
+      <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
+        <hr class="border-gray-400">
+        <p class="text-center text-sm">OR</p>
+        <hr class="border-gray-400">
+      </div>
+
+      <div class="button-group mt-5">
+        
+        <button class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300" (click)="goToLogin()">
+          Already have an account? Login
+        </button>
+      </div>
+    </div>
+
+    <!-- Animated Text -->
+    <div class="md:block hidden w-1/2 text-center">
+      <h2 class="font-bold text-4xl text-[#002D74] animate-rotate">Join Us Now!</h2>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 3s ease-in-out infinite;
+}
+</style>

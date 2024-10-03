@@ -1,0 +1,94 @@
+<nav class="navbar flex items-center justify-between p-4 bg-light dark:bg-gray-800">
+  <!-- Brand -->
+  <div class="flex items-center gap-2 text-2xl font-bold text-[#002D74] md:flex-1">
+    <div class="w-10 h-10 grid place-content-center text-2xl text-white bg-[#002D74] rounded-full">B</div>
+    BRAGGER
+  </div>
+
+  <!-- Navbar Items -->
+  <div class="flex items-center space-x-4">
+    
+    <!-- Dark Mode Toggle -->
+    <button
+      (click)="toggleDarkMode()"
+      class="bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-full p-2 focus:outline-none"
+    >
+      <svg
+        *ngIf="!darkMode"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m8.364-11.364l-.707.707M4.636 19.364l-.707-.707M21 12h-1M4 12H3m15.364 7.364l-.707-.707M4.636 4.636l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"
+        />
+      </svg>
+      <svg
+        *ngIf="darkMode"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m8.364-11.364l-.707.707M4.636 19.364l-.707-.707M21 12h-1M4 12H3m15.364 7.364l-.707-.707M4.636 4.636l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"
+        />
+      </svg>
+    </button>
+
+
+
+    <!-- Profile Icon and Logout Button, only show if authenticated -->
+    <ng-container *ngIf="isAuthenticated()">
+      <button
+        (click)="navigateToProfile()"
+        class="flex items-center focus:outline-none"
+      >
+        <img
+          src="./../../../../assets/profile-icon.jpg"
+          alt="Profile"
+          class="w-10 h-10 rounded-full"
+        />
+      </button>
+    <!-- Home Button -->
+    <button
+      (click)="navigateToDashboard()"
+      class="text-gray-800 dark:text-gray-300 hover:underline"
+    >
+      Home
+    </button>
+      <!-- Logout Button -->
+      <button
+        (click)="logout()"
+        class="text-gray-800 dark:text-gray-300 hover:underline"
+      >
+        Logout
+      </button>
+    </ng-container>
+
+    <!-- Show Login Button if not authenticated -->
+    <ng-container *ngIf="!isAuthenticated()">
+      <button
+        [routerLink]="['/login']"
+        class="text-gray-800 dark:text-gray-300 hover:underline"
+      >
+        Login
+      </button>
+      <button
+        [routerLink]="['/register']"
+        class="text-gray-800 dark:text-gray-300 hover:underline"
+      >
+        Register
+      </button>
+    </ng-container>
+  </div>
+</nav>
