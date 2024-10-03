@@ -6,9 +6,6 @@ Here's a sample `README.md` file for your **Bragger - Achievement Management Sys
 
 **Bragger** is a web-based application designed for managing and tracking achievements. Built using Angular for the frontend and ASP.NET Core 8 for the backend, this system allows users to perform CRUD (Create, Read, Update, Delete) operations on achievements, providing an efficient platform for managing personal and professional milestones.
 
-## Demo Video
-You can watch the demo video of the Bragger Achievement Management System here:  
-[Watch the Demo](#)
 
 ## Project Structure
 - **Frontend**: Angular 18 or higher
