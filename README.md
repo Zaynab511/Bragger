@@ -18,10 +18,11 @@ Here's a sample `README.md` file for your **Bragger - Achievement Management Sys
 - .NET SDK (version 8.0 or higher)
 - SQL Server
 - Visual Studio or any other IDE supporting .NET Core
-- Optional: SMTP service for email functionality
+
 
 ### Frontend
 - Node.js (version 14 or higher)
+- Angular 18 or higher
 - npm (Node Package Manager)
 
 ## Getting Started
@@ -30,7 +31,7 @@ Here's a sample `README.md` file for your **Bragger - Achievement Management Sys
 To get started, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/bragger.git
+git clone https://github.com/Zaynab511/bragger.git
 cd bragger
 ```
 
@@ -79,7 +80,7 @@ cd bragger
 3. Start the frontend development server:
 
    ```bash
-   npm start
+   ng start
    ```
 
 4. Open the app in your browser at `http://localhost:4200`.
